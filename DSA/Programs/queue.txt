@@ -1,0 +1,79 @@
+#include<stdio.h>
+#define MAX 5
+int queue[MAX];
+int front=-1,rear=-1;
+
+
+void enqueue(int x)
+{
+    if(rear==-1 && front==-1)
+    {
+        front++;
+        rear++;
+        queue[rear]=x;
+    }
+    else
+    {
+        if((rear+1)%MAX==front)
+            printf("QUEUE IS FULL");
+        else{
+            rear=(rear+1)%MAX;
+            queue[rear]=x;
+        }
+
+    }
+
+}
+void dequeue()
+{
+    if(front==rear==-1)
+        printf("QUEUE IS EMPTY");
+    else
+    {
+        if(front==rear)
+        {
+            printf("DELETED ELEMENT IS %d",queue[front]);
+            front=rear=-1;
+        }
+        else{
+            printf("DELETED ELEMENT IS %d",queue[front]);
+            front=(front+1)%MAX;
+        }
+    }
+}
+
+void display()
+{
+    if(front==rear==-1)
+        printf("QUEUE IS EMPTY!!");
+    else{
+        printf("ELEMENTS IN QUEUE ARE ");
+        for(int i=front;i!=rear;i=(i+1)%MAX)
+        printf(" %d ",queue[i]);
+        printf(" %d ",queue[rear]);
+    }
+}
+
+int main()
+{
+    int ch,x;
+    while(1)
+    {
+        printf("\n 1.ADD   2. DELETE    3. DISPLAY    4. EXIT \n");
+        printf("ENTER THE CHOICE: \n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+
+        case 1: printf("\n Enter the element: ");
+                scanf("%d",&x);
+            enqueue(x);
+            break;
+        case 2: dequeue();
+                break;
+        case 3: display();
+                break;
+        case 4: return 0;
+        }
+    }
+}

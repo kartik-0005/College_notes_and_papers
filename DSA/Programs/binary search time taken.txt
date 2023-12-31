@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<time.h>
+
+int main()
+{
+    int A[1000],n,k,f=0,i,j;
+    clock_t s,e;
+    double t;
+    printf("\n Enter n value:");			
+    scanf("%d",&n);				// read n value
+   
+    for(i=0;i<n;i++)                             // read data 
+    A[i]=i;
+    
+    printf("\n Array Elements are ...");
+    for(i=0;i<n;i++)
+    printf("%d ",A[i]);
+
+    printf("\n Enter Key element");
+    scanf("%d", &k);				// read key element
+
+    s=clock();					// Start Processor clock
+    for(i=0;i<10000;i++)			// Delay loop
+      for(j=0;j<10000;j++)
+
+    f=Binary_Search(A,k,0,n-1);
+    e=clock();					// End Processor clock
+
+    t=(double)(e-s)/CLOCKS_PER_SEC;			// Calculate total time taken
+    printf("Time taken = %lf", t);
+    if(f==1)
+        printf("Key element found");
+    else
+        printf("Key element not found");
+}
+
+int Binary_Search(int A[],int k,int l,int h)    // Binary Search code
+{
+    int m;
+    while(l<=h)
+    {
+        m=(l+h)/2;
+        if(A[m]==k)
+            return 1; 
+        else
+        if(k>A[m])
+         l=m+1;
+        else
+         h=m-1;
+    }
+    return 0;
+
+}
